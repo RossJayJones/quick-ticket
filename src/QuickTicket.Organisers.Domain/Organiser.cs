@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.NetworkInformation;
-using Ardalis.GuardClauses;
+﻿using Ardalis.GuardClauses;
 using QuickTicket.Core;
 
 namespace QuickTicket.Organisers.Domain

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>cbebdd2d-3b48-4dc4-b17b-b2b64409dc00</UserSecretsId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="6.2.2-develop.2462" />
+    <PackageReference Include="MassTransit.Azure.ServiceBus.Core" Version="6.2.2-develop.2462" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuickTicket.Organisers.Commands\QuickTicket.Organisers.Commands.csproj" />
+  </ItemGroup>
+</Project>
