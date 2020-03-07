@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTicket.Core", "QuickTicket.Core\QuickTicket.Core.csproj", "{287961EF-E2A2-4A68-BB09-065216D6AE66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTicket.Core.Tests", "QuickTicket.Core.Tests\QuickTicket.Core.Tests.csproj", "{0C09EA0D-D117-4A6D-8691-7EAE6397017A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{287961EF-E2A2-4A68-BB09-065216D6AE66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{287961EF-E2A2-4A68-BB09-065216D6AE66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{287961EF-E2A2-4A68-BB09-065216D6AE66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{287961EF-E2A2-4A68-BB09-065216D6AE66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C09EA0D-D117-4A6D-8691-7EAE6397017A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C09EA0D-D117-4A6D-8691-7EAE6397017A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C09EA0D-D117-4A6D-8691-7EAE6397017A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C09EA0D-D117-4A6D-8691-7EAE6397017A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
