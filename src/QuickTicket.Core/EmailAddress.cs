@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Ardalis.GuardClauses;
 
 namespace QuickTicket.Core
 {
@@ -6,6 +8,7 @@ namespace QuickTicket.Core
     {
         public EmailAddress(string value)
         {
+            Guard.Against.NullOrWhiteSpace(value, nameof(value));
             Value = value;
         }
         

@@ -8,7 +8,7 @@ namespace QuickTicket.Organisers.Domain
     {
         public static OrganiserId New()
         {
-            return  new OrganiserId(Guid.NewGuid());
+            return new OrganiserId(Guid.NewGuid());
         }
         
         private OrganiserId(Guid value)
