@@ -11,7 +11,7 @@ namespace QuickTicket.Core
     {
         protected abstract IEnumerable<object> GetValuesForEqualityCheck();
 
-        public override bool Equals(object obj)
+        public sealed override bool Equals(object obj)
         {
             if (obj == null)
                 return false;
@@ -24,7 +24,7 @@ namespace QuickTicket.Core
             return GetValuesForEqualityCheck().SequenceEqual(valueObject.GetValuesForEqualityCheck());
         }
 
-        public override int GetHashCode()
+        public sealed override int GetHashCode()
         {
             var hashcode = new HashCode();
 

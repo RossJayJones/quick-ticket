@@ -5,6 +5,72 @@ namespace QuickTicket.Core.Tests
 {
     public class DescribeValueObject
     {
+        public class DescribeGetHashCode
+        {
+            [Theory]
+            [MemberData(nameof(TestData))]
+            public void ItShouldGenerateConsistentHashCodes(TestValueObject a,
+                TestValueObject b,
+                bool expected)
+            {
+                // Act
+                var actual = a.GetHashCode() == b.GetHashCode();
+                
+                // Assert
+                Assert.Equal(expected, actual);
+            }
+
+            public static IEnumerable<object[]> TestData()
+            {
+                {
+                    /* Objects with the same properties should be equal */
+                    yield return new object[]
+                    {
+                        new TestValueObject
+                        {
+                            Property = "A"
+                        },
+                        new TestValueObject
+                        {
+                            Property = "A"
+                        },
+                        true
+                    };
+                }
+
+                { 
+                    /* Objects with different properties should not be equal */
+                    yield return new object[]
+                    {
+                        new TestValueObject
+                        {
+                            Property = "A"
+                        },
+                        new TestValueObject
+                        {
+                            Property = "B"
+                        },
+                        false
+                    };
+                }
+
+                { 
+                    /* The same instance of the object should be equal */
+                    var instance = new TestValueObject
+                    {
+                        Property = "A"
+                    };
+                    
+                    yield return new object[]
+                    {
+                        instance,
+                        instance,
+                        true
+                    };
+                }
+            }
+        }
+        
         public class DescribeEquals
         {
             [Theory]
