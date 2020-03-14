@@ -20,8 +20,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\QuickTest.Organisers.Infrastructure\QuickTest.Organisers.Infrastructure.csproj" />
     <ProjectReference Include="..\QuickTicket.Organisers.Commands\QuickTicket.Organisers.Commands.csproj" />
     <ProjectReference Include="..\QuickTicket.Organisers.Domain\QuickTicket.Organisers.Domain.csproj" />
+    <ProjectReference Include="..\QuickTicket.Organisers.Infrastructure\QuickTicket.Organisers.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

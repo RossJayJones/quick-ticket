@@ -3,9 +3,9 @@ using MassTransit.Azure.ServiceBus.Core;
 using Microsoft.Azure.ServiceBus.Primitives;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using QuickTest.Organisers.Infrastructure;
 using QuickTicket.Organisers.Domain;
 using QuickTicket.Organisers.Host.Consumers;
+using QuickTicket.Organisers.Infrastructure;
 
 namespace QuickTicket.Organisers.Host
 {

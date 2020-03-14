@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using QuickTicket.Organisers.Domain;
 
-namespace QuickTest.Organisers.Infrastructure
+namespace QuickTicket.Organisers.Infrastructure
 {
     public class OrganiserRepository : IOrganiserRepository
     {
