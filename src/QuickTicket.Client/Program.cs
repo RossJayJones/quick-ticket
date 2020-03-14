@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using MassTransit;
 using MassTransit.Azure.ServiceBus.Core;
@@ -43,10 +44,12 @@ namespace QuickTicket.Client
                 await endpoint.Send<ICreateOrganiser>(new
                 {
                     Name = "Test",
-                    Description = "Test"
+                    Description = "Test",
+                    ContactNumber = "13213123",
+                    EmailAddress = "213123",
+                    WebsiteUrl = "31312"
                 });    
             }
-            
         }
     }
 }
