@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Azure.Cosmos;
 
-namespace QuickTicket.Infrastructure.Storage.Cosmos
+namespace QuickTicket.Storage.CosmosDb
 {
-    public class CosmosDocumentStoreFactory : IDocumentStoreFactory
+    public class DocumentStoreFactory : IDocumentStoreFactory
     {
         private readonly CosmosClient _client;
-        private readonly IReadOnlyDictionary<Type, CosmosContainerInfo> _containers;
+        private readonly IReadOnlyDictionary<Type, ContainerInfo> _containers;
         
-        public CosmosDocumentStoreFactory(CosmosClient client,
-            IReadOnlyDictionary<Type, CosmosContainerInfo> containers)
+        public DocumentStoreFactory(CosmosClient client,
+            IReadOnlyDictionary<Type, ContainerInfo> containers)
         {
             _client = client;
             _containers = containers;
@@ -21,7 +21,7 @@ namespace QuickTicket.Infrastructure.Storage.Cosmos
         {
             var databaseResponse = await _client.CreateDatabaseIfNotExistsAsync(databaseName);
             var database = databaseResponse.Database;
-            var containers = new Dictionary<Type, (Container, CosmosContainerInfo)>();
+            var containers = new Dictionary<Type, (Container, ContainerInfo)>();
             foreach (var pair in _containers)
             {
                 var containerResponse = await database.CreateContainerIfNotExistsAsync(pair.Value.ContainerProperties,
@@ -29,7 +29,7 @@ namespace QuickTicket.Infrastructure.Storage.Cosmos
                     pair.Value.ReadRequestOptions);
                 containers.Add(pair.Key, (containerResponse.Container, pair.Value));
             }
-            var documentStore = new CosmosDocumentStore(containers);
+            var documentStore = new DocumentStore(containers);
             return documentStore;
         }
     }

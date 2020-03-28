@@ -1,17 +1,15 @@
 using Microsoft.Azure.Cosmos;
 
-namespace QuickTicket.Infrastructure.Storage.Cosmos
+namespace QuickTicket.Storage.CosmosDb
 {
-    public abstract class CosmosContainerInfo
+    public abstract class ContainerInfo
     {
-        protected CosmosContainerInfo(ContainerProperties containerProperties,
+        protected ContainerInfo(ContainerProperties containerProperties,
             ItemRequestOptions readRequestOptions = null,
-            RequestOptions writeRequestOptions = null,
             int? throughput = null)
         {
             ContainerProperties = containerProperties;
             ReadRequestOptions = readRequestOptions;
-            WriteRequestOptions = writeRequestOptions;
             Throughput = throughput;
         }
 
@@ -19,9 +17,6 @@ namespace QuickTicket.Infrastructure.Storage.Cosmos
 
         public ItemRequestOptions ReadRequestOptions { get; }
 
-        public RequestOptions WriteRequestOptions { get; }
-
         public int? Throughput { get; }
-
     }
 }

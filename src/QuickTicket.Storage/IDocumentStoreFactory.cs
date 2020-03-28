@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace QuickTicket.Infrastructure.Storage
+namespace QuickTicket.Storage
 {
     public interface IDocumentStoreFactory
     {
