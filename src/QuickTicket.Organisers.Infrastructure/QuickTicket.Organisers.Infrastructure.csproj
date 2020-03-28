@@ -7,9 +7,11 @@
     <ItemGroup>
       <ProjectReference Include="..\QuickTicket.Infrastructure.Storage\QuickTicket.Infrastructure.Storage.csproj" />
       <ProjectReference Include="..\QuickTicket.Organisers.Domain\QuickTicket.Organisers.Domain.csproj" />
+      <ProjectReference Include="..\QuickTicket.Storage\QuickTicket.Storage.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="9.0.0" />
       <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.7.0-preview2" />
     </ItemGroup>
 
