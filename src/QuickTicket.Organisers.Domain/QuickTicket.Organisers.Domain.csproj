@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\QuickTicket.Core\QuickTicket.Core.csproj" />
+      <ProjectReference Include="..\QuickTicket.Domain\QuickTicket.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>

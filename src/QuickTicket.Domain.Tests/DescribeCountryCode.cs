@@ -1,8 +1,8 @@
 using System;
-using QuickTicket.Core.Tests.Fixtures;
+using QuickTicket.Domain.Tests.Fixtures;
 using Xunit;
 
-namespace QuickTicket.Core.Tests
+namespace QuickTicket.Domain.Tests
 {
     public class DescribeCountryCode
     {

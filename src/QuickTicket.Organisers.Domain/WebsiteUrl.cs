@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using QuickTicket.Core;
+using QuickTicket.Domain;
 
 namespace QuickTicket.Organisers.Domain
 {

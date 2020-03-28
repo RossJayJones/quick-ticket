@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using Ardalis.GuardClauses;
 
-namespace QuickTicket.Core
+namespace QuickTicket.Domain
 {
     public class EmailAddress : ValueObject
     {

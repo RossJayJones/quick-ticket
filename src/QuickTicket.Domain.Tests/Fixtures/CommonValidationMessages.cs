@@ -1,4 +1,4 @@
-namespace QuickTicket.Core.Tests.Fixtures
+namespace QuickTicket.Domain.Tests.Fixtures
 {
     public static class CommonValidationMessages
     {

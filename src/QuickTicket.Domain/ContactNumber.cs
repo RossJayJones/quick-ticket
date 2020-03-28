@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Ardalis.GuardClauses;
 
-namespace QuickTicket.Core
+namespace QuickTicket.Domain
 {
     public class ContactNumber : ValueObject
     {

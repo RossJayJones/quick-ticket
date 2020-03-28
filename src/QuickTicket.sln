@@ -1,9 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTicket.Core", "QuickTicket.Core\QuickTicket.Core.csproj", "{287961EF-E2A2-4A68-BB09-065216D6AE66}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTicket.Core.Tests", "QuickTicket.Core.Tests\QuickTicket.Core.Tests.csproj", "{0C09EA0D-D117-4A6D-8691-7EAE6397017A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTicket.Organisers.Domain", "QuickTicket.Organisers.Domain\QuickTicket.Organisers.Domain.csproj", "{B99E984F-6EDC-48C9-8D9D-1DE07D9DB8C6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Organisers", "Organisers", "{0A12173F-0A54-4B42-8487-07A3A9F60D0E}"
@@ -16,20 +12,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTicket.Client", "Quick
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTicket.Organisers.Infrastructure", "QuickTicket.Organisers.Infrastructure\QuickTicket.Organisers.Infrastructure.csproj", "{71E6B062-9E5A-479E-96BA-EA3D76970EFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTicket.Domain", "QuickTicket.Domain\QuickTicket.Domain.csproj", "{E4D2FA09-1FBF-4674-8528-3E115CC662EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTicket.Domain.Tests", "QuickTicket.Domain.Tests\QuickTicket.Domain.Tests.csproj", "{821B0C4E-168E-4D85-9455-8983C354303A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickTicket.Infrastructure.Storage", "QuickTicket.Infrastructure.Storage\QuickTicket.Infrastructure.Storage.csproj", "{4299B067-A71D-4EEF-ABFB-B4792A15A133}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{287961EF-E2A2-4A68-BB09-065216D6AE66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{287961EF-E2A2-4A68-BB09-065216D6AE66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{287961EF-E2A2-4A68-BB09-065216D6AE66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{287961EF-E2A2-4A68-BB09-065216D6AE66}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0C09EA0D-D117-4A6D-8691-7EAE6397017A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0C09EA0D-D117-4A6D-8691-7EAE6397017A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0C09EA0D-D117-4A6D-8691-7EAE6397017A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0C09EA0D-D117-4A6D-8691-7EAE6397017A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B99E984F-6EDC-48C9-8D9D-1DE07D9DB8C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B99E984F-6EDC-48C9-8D9D-1DE07D9DB8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B99E984F-6EDC-48C9-8D9D-1DE07D9DB8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -50,6 +44,18 @@ Global
 		{71E6B062-9E5A-479E-96BA-EA3D76970EFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71E6B062-9E5A-479E-96BA-EA3D76970EFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71E6B062-9E5A-479E-96BA-EA3D76970EFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4D2FA09-1FBF-4674-8528-3E115CC662EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4D2FA09-1FBF-4674-8528-3E115CC662EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4D2FA09-1FBF-4674-8528-3E115CC662EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4D2FA09-1FBF-4674-8528-3E115CC662EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{821B0C4E-168E-4D85-9455-8983C354303A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{821B0C4E-168E-4D85-9455-8983C354303A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{821B0C4E-168E-4D85-9455-8983C354303A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{821B0C4E-168E-4D85-9455-8983C354303A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4299B067-A71D-4EEF-ABFB-B4792A15A133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4299B067-A71D-4EEF-ABFB-B4792A15A133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4299B067-A71D-4EEF-ABFB-B4792A15A133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4299B067-A71D-4EEF-ABFB-B4792A15A133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B99E984F-6EDC-48C9-8D9D-1DE07D9DB8C6} = {0A12173F-0A54-4B42-8487-07A3A9F60D0E}

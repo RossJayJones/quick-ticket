@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Ardalis.GuardClauses;
-using QuickTicket.Core;
+using QuickTicket.Domain;
 
 namespace QuickTicket.Organisers.Domain
 {

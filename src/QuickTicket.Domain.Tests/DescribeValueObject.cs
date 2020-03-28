@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace QuickTicket.Core.Tests
+namespace QuickTicket.Domain.Tests
 {
     public class DescribeValueObject
     {

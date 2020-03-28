@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace QuickTicket.Core
+namespace QuickTicket.Domain
 {
     /// <summary>
     /// Sources: https://enterprisecraftsmanship.com/posts/value-object-better-implementation/

@@ -5,7 +5,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\QuickTicket.Infrastructure.Storage\QuickTicket.Infrastructure.Storage.csproj" />
       <ProjectReference Include="..\QuickTicket.Organisers.Domain\QuickTicket.Organisers.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.7.0-preview2" />
     </ItemGroup>
 
 </Project>

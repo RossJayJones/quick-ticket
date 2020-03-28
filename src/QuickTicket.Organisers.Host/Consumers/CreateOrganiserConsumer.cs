@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using MassTransit;
-using QuickTicket.Core;
+using QuickTicket.Domain;
 using QuickTicket.Organisers.Commands;
 using QuickTicket.Organisers.Domain;
 
