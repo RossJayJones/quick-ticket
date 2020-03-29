@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Azure.Cosmos;
 using QuickTicket.Storage.CosmosDb.IntegrationTests.Fixtures;
 using Xunit;
 
@@ -75,6 +76,47 @@ namespace QuickTicket.Storage.CosmosDb.IntegrationTests
                 // Assert
                 Assert.Contains(documents.Keys, id => documentId == id);
                 Assert.Null(documents[documentId]);
+            }
+            
+            [Fact]
+            public async Task WhenDocumentHasNotBeenSavedToStorage_ItShouldBeRetrievable()
+            {
+                // Arrange
+                var documentStore = await FixtureHelper.CreateDocumentStore(new Dictionary<Type, ContainerInfo>
+                {
+                    [typeof(TestDocument)] = FixtureHelper.CreateTestContainerInfo()
+                });
+                var session = documentStore.CreateSession<TestDocument>();
+                var document = new TestDocument {Id = Guid.NewGuid().ToString(), PartitionKey = "Tests"};
+                session.Add(document);
+                
+                // Act
+                var results = await session.LoadMany(new []{ document.Id });
+
+                // Assert
+                Assert.Contains(results, pair => pair.Key == document.Id);
+                Assert.Same(document, results[document.Id]);
+            }
+            
+            [Fact]
+            public async Task WhenDocumentMarkedForRemoval_ItShouldNotBeAbleToBeLoaded()
+            {
+                // Arrange
+                var documentStore = await FixtureHelper.CreateDocumentStore(new Dictionary<Type, ContainerInfo>
+                {
+                    [typeof(TestDocument)] = FixtureHelper.CreateTestContainerInfo()
+                });
+                var session = documentStore.CreateSession<TestDocument>();
+                var document = new TestDocument {Id = Guid.NewGuid().ToString(), PartitionKey = "Tests"};
+                session.Add(document);
+                session.Remove(document);
+                
+                // Act
+                var results = await session.LoadMany(new []{ document.Id });
+
+                // Assert
+                Assert.Contains(results, pair => pair.Key == document.Id);
+                Assert.Null(results[document.Id]);
             }
         }
 

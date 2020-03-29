@@ -4,8 +4,8 @@ using Microsoft.Azure.ServiceBus.Primitives;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using QuickTicket.Organisers.Domain;
+using QuickTicket.Organisers.Domain.Infrastructure;
 using QuickTicket.Organisers.Host.Consumers;
-using QuickTicket.Organisers.Infrastructure;
 
 namespace QuickTicket.Organisers.Host
 {

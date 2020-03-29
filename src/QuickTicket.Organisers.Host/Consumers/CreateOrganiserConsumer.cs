@@ -15,17 +15,16 @@ namespace QuickTicket.Organisers.Host.Consumers
             _repository = repository;
         }
         
-        public async Task Consume(ConsumeContext<ICreateOrganiser> context)
+        public Task Consume(ConsumeContext<ICreateOrganiser> context)
         {
             var organiser = Organiser.Create(
                 context.Message.Name,
                 context.Message.Description,
                 new ContactNumber(context.Message.ContactNumber),
                 new EmailAddress(context.Message.EmailAddress),
-                new WebsiteUrl(context.Message.WebsiteUrl),
-                null,
-                null);
-            await _repository.AddAsync(organiser);
+                new WebsiteUrl(context.Message.WebsiteUrl));
+            _repository.Add(organiser);
+            return Task.CompletedTask;
         }
     }
 }

@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace QuickTicket.Organisers.Infrastructure.Documents
+namespace QuickTicket.Organisers.Domain.Infrastructure.Documents
 {
     public class OrganiserDocument
     {
@@ -17,9 +17,9 @@ namespace QuickTicket.Organisers.Infrastructure.Documents
 
         public string WebsiteUrl { get; set; }
 
-        public string PhysicalAddress { get; set; }
+        public AddressDocument PhysicalAddress { get; set; }
 
-        public string PostalAddress { get; set; }
+        public AddressDocument PostalAddress { get; set; }
         
         [JsonProperty("_etag")]
         public string Etag { get; set; }

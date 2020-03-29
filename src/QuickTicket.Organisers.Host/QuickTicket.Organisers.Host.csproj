@@ -22,6 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\QuickTicket.Organisers.Commands\QuickTicket.Organisers.Commands.csproj" />
     <ProjectReference Include="..\QuickTicket.Organisers.Domain\QuickTicket.Organisers.Domain.csproj" />
-    <ProjectReference Include="..\QuickTicket.Organisers.Infrastructure\QuickTicket.Organisers.Infrastructure.csproj" />
+    <ProjectReference Include="..\QuickTicket.Organisers.Domain.Infrastructure\QuickTicket.Organisers.Domain.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\QuickTicket.Infrastructure.Storage\QuickTicket.Infrastructure.Storage.csproj" />
       <ProjectReference Include="..\QuickTicket.Organisers.Domain\QuickTicket.Organisers.Domain.csproj" />
       <ProjectReference Include="..\QuickTicket.Storage\QuickTicket.Storage.csproj" />
     </ItemGroup>

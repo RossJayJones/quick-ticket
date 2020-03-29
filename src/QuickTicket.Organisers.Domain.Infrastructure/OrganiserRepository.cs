@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using QuickTicket.Organisers.Domain;
-using QuickTicket.Organisers.Infrastructure.Documents;
+using QuickTicket.Organisers.Domain.Infrastructure.Documents;
 using QuickTicket.Storage;
 
-namespace QuickTicket.Organisers.Infrastructure
+namespace QuickTicket.Organisers.Domain.Infrastructure
 {
     public class OrganiserRepository : IOrganiserRepository
     {
@@ -18,11 +17,16 @@ namespace QuickTicket.Organisers.Infrastructure
             _mapper = mapper;
         }
         
-        public Task AddAsync(Organiser organiser)
+        public void Add(Organiser organiser)
         {
             var document = _mapper.Map<OrganiserDocument>(organiser);
             _session.Add(document);
-            return Task.CompletedTask;
+        }
+
+        public void Update(Organiser organiser)
+        {
+            var document = _mapper.Map<OrganiserDocument>(organiser);
+            _session.Update(document);
         }
 
         public async Task<Organiser> LoadAsync(OrganiserId organiserId)

@@ -22,7 +22,7 @@ namespace QuickTicket.Organisers.Domain
             PostCode = postCode;
             CountryCode = countryCode;
         }
-        
+      
         public string Street { get; }
 
         public string Suburb { get; }

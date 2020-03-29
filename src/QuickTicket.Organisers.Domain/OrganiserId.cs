@@ -11,7 +11,7 @@ namespace QuickTicket.Organisers.Domain
             return new OrganiserId(Guid.NewGuid());
         }
         
-        private OrganiserId(Guid value)
+        public OrganiserId(Guid value)
         {
             Value = value;
         }

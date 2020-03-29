@@ -9,6 +9,16 @@ namespace QuickTicket.Storage
         /// When implemented by a derived class the document will be added to the current session
         /// </summary>
         void Add(TDocument document);
+
+        /// <summary>
+        /// When implemented by a derived class the document will be updated
+        /// </summary>
+        void Update(TDocument document);
+
+        /// <summary>
+        /// When implemented by a derived class the document will be marked for removal
+        /// </summary>
+        void Remove(TDocument document);
         
         /// <summary>
         /// When implemented by a derived class one or more documents are retrieved for the give collection of document ids

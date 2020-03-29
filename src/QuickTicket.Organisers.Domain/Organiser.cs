@@ -9,46 +9,27 @@ namespace QuickTicket.Organisers.Domain
             string description,
             ContactNumber contactNumber,
             EmailAddress emailAddress,
-            WebsiteUrl websiteUrl,
-            Address physicalAddress,
-            Address postalAddress)
+            WebsiteUrl websiteUrl)
         {
             Guard.Against.NullOrEmpty(name, nameof(name));
             Guard.Against.NullOrEmpty(description, nameof(description));
             Guard.Against.Null(contactNumber, nameof(contactNumber));
             Guard.Against.Null(emailAddress, nameof(emailAddress));
             Guard.Against.Null(websiteUrl, nameof(websiteUrl));
-            Guard.Against.Null(physicalAddress, nameof(physicalAddress));
-            Guard.Against.Null(postalAddress, nameof(postalAddress));
-            var organiser = new Organiser(
-                OrganiserId.New(),
-                name,
-                description,
-                contactNumber,
-                emailAddress,
-                websiteUrl,
-                physicalAddress,
-                postalAddress);
+            var organiser = new Organiser(OrganiserId.New())
+            {
+                Name = name,
+                Description = description,
+                ContactNumber = contactNumber,
+                EmailAddress = emailAddress,
+                WebsiteUrl = websiteUrl
+            };
             return organiser;
         }
 
-        private Organiser(OrganiserId organiserId,
-            string name,
-            string description,
-            ContactNumber contactNumber,
-            EmailAddress emailAddress,
-            WebsiteUrl websiteUrl,
-            Address physicalAddress,
-            Address postalAddress)
+        private Organiser(OrganiserId organiserId)
         {
             OrganiserId = organiserId;
-            Name = name;
-            Description = description;
-            ContactNumber = contactNumber;
-            EmailAddress = emailAddress;
-            WebsiteUrl = websiteUrl;
-            PhysicalAddress = physicalAddress;
-            PostalAddress = postalAddress;
         }
         
         public OrganiserId OrganiserId { get; }

@@ -1,4 +1,4 @@
-namespace QuickTicket.Organisers.Infrastructure.Documents
+namespace QuickTicket.Organisers.Domain.Infrastructure.Documents
 {
     public class AddressDocument
     {

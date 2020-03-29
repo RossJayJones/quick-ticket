@@ -28,9 +28,7 @@ namespace QuickTicket.Storage.CosmosDb.IntegrationTests.Fixtures
         public static ContainerInfo<TestDocument> CreateTestContainerInfo()
         {
             return new ContainerInfo<TestDocument>(
-                getDocumentPartitionKey: doc => new PartitionKey(doc.PartitionKey),
-                getDocumentId: doc => doc.Id,
-                getDocumentEtag: doc => doc.Etag,
+                getDocumentMetadata: doc => new DocumentMetadata(doc.Id, new PartitionKey(doc.PartitionKey), doc.Etag),
                 containerProperties: new ContainerProperties
                 {
                     Id = "IntegrationTests",

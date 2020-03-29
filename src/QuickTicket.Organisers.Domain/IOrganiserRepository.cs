@@ -4,7 +4,9 @@ namespace QuickTicket.Organisers.Domain
 {
     public interface IOrganiserRepository
     {
-        Task AddAsync(Organiser organiser);
+        void Add(Organiser organiser);
+
+        void Update(Organiser organiser);
 
         Task<Organiser> LoadAsync(OrganiserId organiserId);
     }

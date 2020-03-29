@@ -10,7 +10,7 @@ namespace QuickTicket.Organisers.Domain
             Value = value;
         }
         
-        public string Value { get; set; }
+        public string Value { get; }
 
         protected override IEnumerable<object> GetValuesForEqualityCheck()
         {
