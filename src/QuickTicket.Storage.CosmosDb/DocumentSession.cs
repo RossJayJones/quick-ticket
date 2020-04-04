@@ -25,7 +25,7 @@ namespace QuickTicket.Storage.CosmosDb
         public void Add<TDocument>(TDocument document)
         {
             var documentMetadata = _containerInfo.GetDocumentMetadataForDocument(document);
-            var documentState = new DocumentState<TDocument>(documentMetadata,
+            var documentState = new DocumentState(documentMetadata,
                 document);
 
             if (!_trackedDocuments.TryAdd((typeof(TDocument), documentState.Metadata.Id), documentState))
@@ -40,7 +40,7 @@ namespace QuickTicket.Storage.CosmosDb
             if (_trackedDocuments.TryGetValue((typeof(TDocument), documentMetadata.Id),
                 out var documentState))
             {
-                ((DocumentState<TDocument>)documentState).Document = document;
+                documentState.Document = document;
             }
             else
             {
@@ -72,7 +72,7 @@ namespace QuickTicket.Storage.CosmosDb
                 if (_trackedDocuments.TryGetValue((typeof(TDocument), documentId), out var documentState)
                     && !documentState.IsDeleted)
                 {
-                    results.Add(documentState.Metadata.Id, (DocumentState<TDocument>)documentState);
+                    results.Add(documentState.Metadata.Id, documentState);
                 }
                 else
                 {
@@ -95,7 +95,7 @@ namespace QuickTicket.Storage.CosmosDb
                     foreach (var document in await queryIterator.ReadNextAsync())
                     {
                         var documentMetadata = _containerInfo.GetDocumentMetadataForDocument(document);
-                        var documentState = new DocumentState<TDocument>(documentMetadata, document);
+                        var documentState = new DocumentState(documentMetadata, document);
                         _trackedDocuments.TryAdd((typeof(TDocument), documentMetadata.Id), documentState);
                         results[documentMetadata.Id] = documentState;
                     }
@@ -145,7 +145,7 @@ namespace QuickTicket.Storage.CosmosDb
 
             var response = await batch.ExecuteAsync();
             
-            UpdateEtagFromResponseUtils.UpdateEtagFromResponse(this, documentTypesInBatch, response);
+            ReflectionUtils.InvokeUpdateEtagFromResponse(this, documentTypesInBatch, response);
         }
 
         private PartitionKey ResolvePartitionKey()
@@ -193,7 +193,13 @@ namespace QuickTicket.Storage.CosmosDb
 
         private class DocumentState
         {
-            protected DocumentState(DocumentMetadata metadata)
+            public DocumentState(DocumentMetadata metadata,
+                object document) : this(metadata)
+            {
+                Document = document;
+            }
+            
+            private DocumentState(DocumentMetadata metadata)
             {
                 Metadata = metadata;
             }
@@ -211,31 +217,22 @@ namespace QuickTicket.Storage.CosmosDb
             
             public static readonly DocumentState Empty = new DocumentState(new DocumentMetadata(typeof(object), null, PartitionKey.Null, null));
         }
-
-        private class DocumentState<TDocument> : DocumentState
-        {
-            public DocumentState(DocumentMetadata metadata,
-                TDocument document) : base(metadata)
-            {
-                Document = document;
-            }
-        }
         
         /// <summary>
         /// This is a workaround for the lack of a non generic option to call GetOperationResultAtIndex.
         /// </summary>
-        private static class UpdateEtagFromResponseUtils
+        private static class ReflectionUtils
         {
             private static readonly MethodInfo Method;
             private static readonly ConcurrentDictionary<Type, MethodInfo> GenericMethods;
             
-            static UpdateEtagFromResponseUtils()
+            static ReflectionUtils()
             {
                 Method = typeof(DocumentSession).GetMethod(nameof(DocumentSession.UpdateEtagFromResponse), BindingFlags.Instance | BindingFlags.NonPublic);
                 GenericMethods = new ConcurrentDictionary<Type, MethodInfo>();
             }
 
-            public static void UpdateEtagFromResponse(DocumentSession session,
+            public static void InvokeUpdateEtagFromResponse(DocumentSession session,
                 IList<Type> types,
                 TransactionalBatchResponse response)
             {
