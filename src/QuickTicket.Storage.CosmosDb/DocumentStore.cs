@@ -1,29 +1,42 @@
 using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.Azure.Cosmos;
 
 namespace QuickTicket.Storage.CosmosDb
 {
     public class DocumentStore : IDocumentStore
     {
-        private readonly IReadOnlyDictionary<Type, (Container Container, ContainerInfo ContainerInfo)> _containers;
+        private readonly CosmosClient _client;
+        private readonly string _databaseName;
+        private readonly ContainerInfo _containerInfo;
+        private Container _container;
         
-        internal DocumentStore(IReadOnlyDictionary<Type, (Container, ContainerInfo)> containers)
+        public DocumentStore(CosmosClient client,
+            string databaseName,
+            ContainerInfo containerInfo)
         {
-            _containers = containers;
+            _client = client;
+            _databaseName = databaseName;
+            _containerInfo = containerInfo;
         }
-        
-        public IDocumentSession<TDocument> CreateSession<TDocument>()
-            where TDocument : class
-        {
-            if (_containers.TryGetValue(typeof(TDocument), out var item))
-            {
-                return new DocumentSession<TDocument>(
-                    container: item.Container, 
-                    containerInfo: (ContainerInfo<TDocument>)item.ContainerInfo);
-            }
 
-            throw new InvalidOperationException($"A container has not been registered for document type {typeof(TDocument)}");
+        public async Task Init()
+        {
+            var databaseResponse = await _client.CreateDatabaseIfNotExistsAsync(_databaseName);
+            var database = databaseResponse.Database;
+            _container = await database.CreateContainerIfNotExistsAsync(_containerInfo.ContainerProperties,
+                _containerInfo.Throughput,
+                _containerInfo.ReadRequestOptions);
+        }
+
+        public IDocumentSession CreateSession()
+        {
+            if (_container == null)
+            {
+                throw new InvalidOperationException($"The document store has not been initialized.");
+            }
+            
+            return new DocumentSession(_container, _containerInfo);
         }
     }
 }

@@ -7,10 +7,10 @@ namespace QuickTicket.Organisers.Domain.Infrastructure
 {
     public class OrganiserRepository : IOrganiserRepository
     {
-        private readonly IDocumentSession<OrganiserDocument> _session;
+        private readonly IDocumentSession _session;
         private readonly IMapper _mapper;
         
-        public OrganiserRepository(IDocumentSession<OrganiserDocument> session,
+        public OrganiserRepository(IDocumentSession session,
             IMapper mapper)
         {
             _session = session;
@@ -32,7 +32,7 @@ namespace QuickTicket.Organisers.Domain.Infrastructure
         public async Task<Organiser> LoadAsync(OrganiserId organiserId)
         {
             var documentId = organiserId.Value.ToString();
-            var documents = await _session.LoadMany(new[] { documentId });
+            var documents = await _session.LoadMany<OrganiserDocument>(new[] { documentId });
             return _mapper.Map<Organiser>(documents[documentId]);
         }
     }

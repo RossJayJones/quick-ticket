@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Azure.Cosmos;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,9 +6,9 @@ namespace QuickTicket.Storage.CosmosDb
 {
     public static class ServiceCollectionExtensions
     {
-        public static async Task AddCosmosDbStorageAsync(IServiceCollection services,
+        public static void AddCosmosDbStorageAsync(IServiceCollection services,
             CosmosDbConfiguration configuration,
-            IReadOnlyDictionary<Type, ContainerInfo> containerInfo,
+            ContainerInfo containerInfo,
             CosmosClientOptions options = null)
         {
             var client = new CosmosClient(configuration.ConnectionString, options ?? new CosmosClientOptions
@@ -18,8 +16,9 @@ namespace QuickTicket.Storage.CosmosDb
                 ConnectionMode = ConnectionMode.Gateway,
                 ConsistencyLevel = ConsistencyLevel.Session
             });
-            var documentStoreFactory = new DocumentStoreFactory(client, containerInfo);
-            var documentStore = await documentStoreFactory.Create(configuration.DatabaseName);
+            var documentStore = new DocumentStore(client,
+                configuration.DatabaseName,
+                containerInfo);
             services.AddSingleton(p => documentStore);
         }
     }

@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Azure.Cosmos;
 using QuickTicket.Storage.CosmosDb.IntegrationTests.Fixtures;
 using Xunit;
 
@@ -15,11 +13,8 @@ namespace QuickTicket.Storage.CosmosDb.IntegrationTests
             public async Task WhenDocumentHasAlreadyBeenAdded_ItShouldThrowInvalidOperationException()
             {
                 // Arrange
-                var documentStore = await FixtureHelper.CreateDocumentStore(new Dictionary<Type, ContainerInfo>
-                {
-                    [typeof(TestDocument)] = FixtureHelper.CreateTestContainerInfo()
-                });
-                var session = documentStore.CreateSession<TestDocument>();
+                var documentStore = await FixtureHelper.CreateDocumentStore();
+                var session = documentStore.CreateSession();
                 var document = new TestDocument {Id = Guid.NewGuid().ToString(), PartitionKey = "Tests"};
                 session.Add(document);
                 
@@ -37,20 +32,17 @@ namespace QuickTicket.Storage.CosmosDb.IntegrationTests
             public async Task WhenDocumentIdsProvided_ItShouldLoadTheDocuments()
             {
                 // Arrange
-                var documentStore = await FixtureHelper.CreateDocumentStore(new Dictionary<Type, ContainerInfo>
-                {
-                    [typeof(TestDocument)] = FixtureHelper.CreateTestContainerInfo()
-                });
-                var session = documentStore.CreateSession<TestDocument>();
+                var documentStore = await FixtureHelper.CreateDocumentStore();
+                var session = documentStore.CreateSession();
                 var document1 = new TestDocument {Id = Guid.NewGuid().ToString(), PartitionKey = "Tests"};
                 session.Add(document1);
                 var document2 = new TestDocument {Id = Guid.NewGuid().ToString(), PartitionKey = "Tests"};
                 session.Add(document2);
                 await session.SaveChanges();
-                session = documentStore.CreateSession<TestDocument>();
+                session = documentStore.CreateSession();
                 
                 // Act
-                var documents = await session.LoadMany(new[] {document1.Id, document2.Id});
+                var documents = await session.LoadMany<TestDocument>(new[] {document1.Id, document2.Id});
                 
                 // Assert
                 Assert.Contains(documents.Keys, id => document1.Id == id);
@@ -63,15 +55,12 @@ namespace QuickTicket.Storage.CosmosDb.IntegrationTests
             public async Task WhenDocumentNotFound_ItShouldReturnNull()
             {
                 // Arrange
-                var documentStore = await FixtureHelper.CreateDocumentStore(new Dictionary<Type, ContainerInfo>
-                {
-                    [typeof(TestDocument)] = FixtureHelper.CreateTestContainerInfo()
-                });
-                var session = documentStore.CreateSession<TestDocument>();
+                var documentStore = await FixtureHelper.CreateDocumentStore();
+                var session = documentStore.CreateSession();
                 var documentId = Guid.NewGuid().ToString();
                 
                 // Act
-                var documents = await session.LoadMany(new[] { documentId });
+                var documents = await session.LoadMany<TestDocument>(new[] { documentId });
                 
                 // Assert
                 Assert.Contains(documents.Keys, id => documentId == id);
@@ -82,16 +71,13 @@ namespace QuickTicket.Storage.CosmosDb.IntegrationTests
             public async Task WhenDocumentHasNotBeenSavedToStorage_ItShouldBeRetrievable()
             {
                 // Arrange
-                var documentStore = await FixtureHelper.CreateDocumentStore(new Dictionary<Type, ContainerInfo>
-                {
-                    [typeof(TestDocument)] = FixtureHelper.CreateTestContainerInfo()
-                });
-                var session = documentStore.CreateSession<TestDocument>();
+                var documentStore = await FixtureHelper.CreateDocumentStore();
+                var session = documentStore.CreateSession();
                 var document = new TestDocument {Id = Guid.NewGuid().ToString(), PartitionKey = "Tests"};
                 session.Add(document);
                 
                 // Act
-                var results = await session.LoadMany(new []{ document.Id });
+                var results = await session.LoadMany<TestDocument>(new []{ document.Id });
 
                 // Assert
                 Assert.Contains(results, pair => pair.Key == document.Id);
@@ -102,17 +88,14 @@ namespace QuickTicket.Storage.CosmosDb.IntegrationTests
             public async Task WhenDocumentMarkedForRemoval_ItShouldNotBeAbleToBeLoaded()
             {
                 // Arrange
-                var documentStore = await FixtureHelper.CreateDocumentStore(new Dictionary<Type, ContainerInfo>
-                {
-                    [typeof(TestDocument)] = FixtureHelper.CreateTestContainerInfo()
-                });
-                var session = documentStore.CreateSession<TestDocument>();
+                var documentStore = await FixtureHelper.CreateDocumentStore();
+                var session = documentStore.CreateSession();
                 var document = new TestDocument {Id = Guid.NewGuid().ToString(), PartitionKey = "Tests"};
                 session.Add(document);
                 session.Remove(document);
                 
                 // Act
-                var results = await session.LoadMany(new []{ document.Id });
+                var results = await session.LoadMany<TestDocument>(new []{ document.Id });
 
                 // Assert
                 Assert.Contains(results, pair => pair.Key == document.Id);
@@ -126,17 +109,14 @@ namespace QuickTicket.Storage.CosmosDb.IntegrationTests
             public async Task WhenEtagStale_ItShouldThrowException()
             {
                 // Arrange
-                var documentStore = await FixtureHelper.CreateDocumentStore(new Dictionary<Type, ContainerInfo>
-                {
-                    [typeof(TestDocument)] = FixtureHelper.CreateTestContainerInfo()
-                });
-                var session1 = documentStore.CreateSession<TestDocument>();
+                var documentStore = await FixtureHelper.CreateDocumentStore();
+                var session1 = documentStore.CreateSession();
                 var document1 = new TestDocument {Id = Guid.NewGuid().ToString(), PartitionKey = "Tests"};
                 session1.Add(document1);
                 await session1.SaveChanges();
                 // Cause the etag to become stale
-                var session2 = documentStore.CreateSession<TestDocument>();
-                await session2.LoadMany(new[] {document1.Id});
+                var session2 = documentStore.CreateSession();
+                await session2.LoadMany<TestDocument>(new[] {document1.Id});
                 await session2.SaveChanges();
                 
                 // Act
